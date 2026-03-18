@@ -21,11 +21,12 @@
 7. [Parametric Triggers](#-parametric-triggers)
 8. [AI/ML Integration Plan](#-aiml-integration-plan)
 9. [Fraud Detection Architecture](#-fraud-detection-architecture)
-10. [Platform Justification](#-platform-justification-web--mobile)
-11. [Tech Stack](#-tech-stack)
-12. [Development Plan](#-development-plan)
-13. [Business Model](#-business-model)
-14. [Scope Boundaries](#-scope-boundaries)
+10. [Adversarial Defense & Anti-Spoofing Strategy](#-adversarial-defense--anti-spoofing-strategy)
+11. [Platform Justification](#-platform-justification-web--mobile)
+12. [Tech Stack](#-tech-stack)
+13. [Development Plan](#-development-plan)
+14. [Business Model](#-business-model)
+15. [Scope Boundaries](#-scope-boundaries)
 
 ---
 
@@ -688,51 +689,51 @@ Our anti-spoofing strategy is not a single checkpoint — it's a series of overl
 ```mermaid
 flowchart TD
     subgraph LAYER1["Layer 1: Device Integrity"]
-        D1[Root/Jailbreak Detection]
-        D2[Spoofing App Detection\n(Play Integrity API)]
-        D3[Developer Mode Check]
+        D1["Root/Jailbreak Detection"]
+        D2["Spoofing App Detection<br/>(Play Integrity API)"]
+        D3["Developer Mode Check"]
     end
     
     subgraph LAYER2["Layer 2: GPS Validation"]
-        D4[Multi-constellation\nGPS + GLONASS + Galileo]
-        D5[Accuracy Confidence\nScore (<10m required)]
-        D6[Altitude Cross-check\n(with terrain database)]
+        D4["Multi-constellation<br/>GPS + GLONASS + Galileo"]
+        D5["Accuracy Confidence<br/>Score (<10m required)"]
+        D6["Altitude Cross-check<br/>(with terrain database)"]
     end
     
     subgraph LAYER3["Layer 3: Sensor Fusion"]
-        D7[Accelerometer\nMotion Correlation]
-        D8[Gyroscope\nDirection Correlation]
-        D9[Barometer\nAltitude Correlation]
+        D7["Accelerometer<br/>Motion Correlation"]
+        D8["Gyroscope<br/>Direction Correlation"]
+        D9["Barometer<br/>Altitude Correlation"]
     end
     
     subgraph LAYER4["Layer 4: Contextual Signals"]
-        D10[Cell Tower\nClustering]
-        D11[Wi-Fi SSID\nFingerprint]
-        D12[Platform Order\nActivity]
+        D10["Cell Tower<br/>Clustering"]
+        D11["Wi-Fi SSID<br/>Fingerprint"]
+        D12["Platform Order<br/>Activity"]
     end
     
     subgraph LAYER5["Layer 5: Behavioral Analysis"]
-        D13[Historical Pattern\nDeviation]
-        D14[Velocity\nAnomaly]
-        D15[Timezone\nConsistency]
+        D13["Historical Pattern<br/>Deviation"]
+        D14["Velocity<br/>Anomaly"]
+        D15["Timezone<br/>Consistency"]
     end
     
     subgraph LAYER6["Layer 6: Ring Detection"]
-        D16[Temporal\nClustering]
-        D17[Spatial\nClustering]
-        D18[Network/Device\nCorrelation]
+        D16["Temporal<br/>Clustering"]
+        D17["Spatial<br/>Clustering"]
+        D18["Network/Device<br/>Correlation"]
     end
     
     LAYER1 --> LAYER2 --> LAYER3 --> LAYER4 --> LAYER5 --> LAYER6
     
-    LAYER1 -.->|Fail at any layer| R1[🚨 Flagged\nFor Review]
+    LAYER1 -.->|Fail at any layer| R1["🚨 Flagged<br/>For Review"]
     LAYER2 -.-> R1
     LAYER3 -.-> R1
     LAYER4 -.-> R1
     LAYER5 -.-> R1
     LAYER6 -.-> R1
     
-    LAYER6 -.->|Pass all layers| R2[✅ Auto-Approve\nPayout Released]
+    LAYER6 -.->|Pass all layers| R2["✅ Auto-Approve<br/>Payout Released"]
 ```
 
 ---
@@ -774,26 +775,6 @@ To protect the liquidity pool and honest workers:
 **Bottom Line:** Spoofing GPS is easy. Spoofing 7 independent, physics-constrained signals simultaneously — while coordinating with 499 others without triggering temporal alerts — is economically impractical.
 
 Our system raises the cost of fraud far above the payout value, making exploitation unprofitable.
-
----
-
-### 📋 Updated Table of Contents
-
-1. [Problem Statement](#-problem-statement)
-2. [Our Solution](#-our-solution)
-3. [Persona & Scenario Analysis](#-persona--scenario-analysis)
-4. [System Workflow](#-system-workflow)
-5. [User Flow Diagram](#-user-flow-diagram)
-6. [Weekly Premium Model](#-weekly-premium-model)
-7. [Parametric Triggers](#-parametric-triggers)
-8. [AI/ML Integration Plan](#-aiml-integration-plan)
-9. [Fraud Detection Architecture](#-fraud-detection-architecture)
-10. **[Adversarial Defense & Anti-Spoofing Strategy](#-adversarial-defense--anti-spoofing-strategy)** ← NEW
-11. [Platform Justification](#-platform-justification-web--mobile)
-12. [Tech Stack](#-tech-stack)
-13. [Development Plan](#-development-plan)
-14. [Business Model](#-business-model)
-15. [Scope Boundaries](#-scope-boundaries)
 
 ---
 
@@ -1002,6 +983,8 @@ Loss Ratio Target          :  55–60%
 **Demo Video:** [YouTube/Drive Link — to be added]
 
 ---
+
+
 
 > *"SurakshaAI isn't just insurance. It's a financial safety net that thinks ahead, acts instantly, and never asks the worker to do more than their job."*
 
