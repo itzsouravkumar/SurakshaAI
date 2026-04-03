@@ -1,98 +1,58 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, ScrollView, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import { BlurView } from 'expo-blur';
+import { Header } from '@/components/dashboard/Header';
+import { HeroCard } from '@/components/dashboard/HeroCard';
+import { ActiveProtections } from '@/components/dashboard/ActiveProtections';
+import { RecentActivity } from '@/components/dashboard/RecentActivity';
+import { PrivacyBanner } from '@/components/dashboard/PrivacyBanner';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+export default function UserDashboardScreen() {
+  const securityScore = 94; // Example score
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      
+      {/* Animated Mesh Gradient Background (Simulated) */}
+      <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
+        <View style={[styles.blob, { backgroundColor: '#e0e7ff', top: '-10%', left: '-20%', width: 400, height: 400 }]} />
+        <View style={[styles.blob, { backgroundColor: '#f3e8ff', top: '30%', right: '-30%', width: 450, height: 450 }]} />
+        <View style={[styles.blob, { backgroundColor: '#ccfbf1', bottom: '-5%', left: '10%', width: 350, height: 350 }]} />
+        <BlurView intensity={100} tint="light" style={StyleSheet.absoluteFillObject} />
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Header userName="Alex" />
+
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <HeroCard securityScore={securityScore} />
+          
+          <ActiveProtections />
+          
+          <RecentActivity />
+          
+          <PrivacyBanner />
+
+          <View style={{ height: 40 }} />
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: '#f1f5f9',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  blob: {
     position: 'absolute',
+    borderRadius: 999,
+    opacity: 0.7,
+  },
+  scrollContent: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
 });
