@@ -2,12 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { CheckCircle2, AlertCircle, Shield } from 'lucide-react-native';
 import { GlassCard } from '../ui/GlassCard';
+import { MOCK_ACTIVITY } from '@/constants/mockData';
 
-const recentActivity = [
-  { id: 1, title: 'Blocked tracking cookie', app: 'Chrome Browser', time: '10m ago', type: 'success' },
-  { id: 2, title: 'App scan completed', app: 'System Scan', time: '2h ago', type: 'info' },
-  { id: 3, title: 'Unsecured Wi-Fi detected', app: 'Network Guard', time: '1d ago', type: 'warning' },
-];
+const recentActivity = MOCK_ACTIVITY;
 
 export function RecentActivity() {
   return (
