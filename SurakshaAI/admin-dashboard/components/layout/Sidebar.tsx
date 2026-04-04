@@ -1,14 +1,16 @@
 import React from 'react';
-import { ShieldAlert, Users, Activity, Settings, Bell, Database, Server, X, LucideIcon } from 'lucide-react';
+import { ShieldAlert, Users, Activity, Settings, Bell, Database, Server, X, LucideIcon, Map, FileText, IndianRupee } from 'lucide-react';
 
 interface SidebarItemProps {
   icon: LucideIcon;
   label: string;
   active?: boolean;
+  onClick?: () => void;
 }
 
-const SidebarItem = ({ icon: Icon, label, active }: SidebarItemProps) => (
+const SidebarItem = ({ icon: Icon, label, active, onClick }: SidebarItemProps) => (
   <button 
+    onClick={onClick}
     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 group relative
       ${active 
         ? 'bg-white/70 shadow-sm border border-white font-semibold text-indigo-700' 
@@ -24,9 +26,11 @@ const SidebarItem = ({ icon: Icon, label, active }: SidebarItemProps) => (
 interface SidebarProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 }
 
-export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+export function Sidebar({ isOpen, setIsOpen, activeTab, setActiveTab }: SidebarProps) {
   return (
     <>
       {/* MOBILE OVERLAY */}
@@ -56,16 +60,16 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <div className="flex-1 overflow-y-auto py-2 px-4 space-y-1">
           <div className="mb-6 px-1">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Overview</p>
-            <SidebarItem icon={Activity} label="Dashboard" active />
-            <SidebarItem icon={ShieldAlert} label="Threats" />
-            <SidebarItem icon={Server} label="Network" />
+            <SidebarItem icon={Activity} label="Dashboard" active={activeTab === 'Dashboard'} onClick={() => setActiveTab('Dashboard')} />
+            <SidebarItem icon={FileText} label="Claims & Fraud" active={activeTab === 'Claims'} onClick={() => setActiveTab('Claims')} />
+            <SidebarItem icon={Map} label="Risk Heatmap" active={activeTab === 'Heatmap'} onClick={() => setActiveTab('Heatmap')} />
           </div>
 
           <div className="mb-6 px-1">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Management</p>
-            <SidebarItem icon={Users} label="Access Control" />
-            <SidebarItem icon={Database} label="Data Logs" />
-            <SidebarItem icon={Bell} label="Alert Rules" />
+            <SidebarItem icon={Users} label="Workers Directory" active={activeTab === 'Workers'} onClick={() => setActiveTab('Workers')} />
+            <SidebarItem icon={IndianRupee} label="Financial Payouts" active={activeTab === 'Financials'} onClick={() => setActiveTab('Financials')} />
+            <SidebarItem icon={Bell} label="Triggers & Rules" active={activeTab === 'Triggers'} onClick={() => setActiveTab('Triggers')} />
           </div>
         </div>
 
@@ -73,10 +77,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <div className="p-5">
           <div className="flex items-center space-x-3 p-3 rounded-2xl bg-white/50 border border-white shadow-sm hover:bg-white/70 transition-colors cursor-pointer">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md">
-              <span className="text-sm font-bold">AD</span>
+              <span className="text-sm font-bold">SA</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold text-slate-900 truncate">System Admin</p>
+              <p className="text-sm font-bold text-slate-900 truncate">Suraksha Admin</p>
               <p className="text-[11px] font-semibold text-slate-500 truncate">admin@suraksha.ai</p>
             </div>
             <Settings size={18} className="text-slate-400" />

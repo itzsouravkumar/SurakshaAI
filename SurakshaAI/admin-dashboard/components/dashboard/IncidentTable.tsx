@@ -5,8 +5,8 @@ export interface AlertData {
   type: string;
   target: string;
   time: string;
-  severity: string;
-  status: string;
+  severity: string;  // We'll use this for "Trust Score" status like High, Medium, Low
+  status: string;    // Auto-Approved, Flagged, Under Review
 }
 
 interface IncidentTableProps {
@@ -18,8 +18,8 @@ export function IncidentTable({ alerts }: IncidentTableProps) {
     <div className="md:col-span-2 lg:col-span-3 glass-card overflow-hidden flex flex-col">
       <div className="p-6 border-b border-white/50 flex justify-between items-center bg-white/30 backdrop-blur-md">
         <div>
-          <h3 className="text-lg font-bold text-slate-900">Recent Incidents Log</h3>
-          <p className="text-xs font-semibold text-slate-500 mt-0.5">Latest threats identified and mitigated by AI</p>
+          <h3 className="text-lg font-bold text-slate-900">Recent Claims Log</h3>
+          <p className="text-xs font-semibold text-slate-500 mt-0.5">Latest parametric disruptions identified and processed automatically</p>
         </div>
         <button className="text-xs text-indigo-700 hover:text-indigo-900 font-bold transition-colors bg-white/80 px-3 py-2 rounded-lg border border-white shadow-sm">
           View Full Audit
@@ -29,9 +29,9 @@ export function IncidentTable({ alerts }: IncidentTableProps) {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/50 text-[10px] uppercase tracking-widest text-slate-500 border-b border-white/50">
-              <th className="px-6 py-4 font-bold">Incident ID</th>
-              <th className="px-6 py-4 font-bold">Type</th>
-              <th className="px-6 py-4 font-bold">Severity</th>
+              <th className="px-6 py-4 font-bold">Claim ID</th>
+              <th className="px-6 py-4 font-bold">Trigger Type</th>
+              <th className="px-6 py-4 font-bold">Trust Level</th>
               <th className="px-6 py-4 font-bold">Status</th>
               <th className="px-6 py-4 font-bold text-right">Time</th>
             </tr>
@@ -44,8 +44,8 @@ export function IncidentTable({ alerts }: IncidentTableProps) {
                 <td className="px-6 py-4">
                   <span className={`px-2.5 py-1 rounded-md text-xs font-bold border ${
                     alert.severity === 'Critical' ? 'bg-red-50 text-red-700 border-red-200 shadow-sm' :
-                    alert.severity === 'High' ? 'bg-amber-50 text-amber-700 border-amber-200 shadow-sm' :
-                    alert.severity === 'Medium' ? 'bg-indigo-50 text-indigo-700 border-indigo-200 shadow-sm' :
+                    alert.severity === 'High Trust' ? 'bg-emerald-50 text-emerald-700 border-emerald-200 shadow-sm' :
+                    alert.severity === 'Medium Trust' ? 'bg-amber-50 text-amber-700 border-amber-200 shadow-sm' :
                     'bg-slate-50 text-slate-700 border-slate-200 shadow-sm'
                   }`}>
                     {alert.severity}
@@ -54,8 +54,8 @@ export function IncidentTable({ alerts }: IncidentTableProps) {
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-2 font-semibold">
                     <span className={`w-2 h-2 rounded-full ${
-                      alert.status === 'Resolved' ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' :
-                      alert.status === 'Blocked' ? 'bg-slate-800' : 'bg-amber-500 shadow-[0_0_8px_#f59e0b] animate-pulse'
+                      alert.status === 'Auto-Approved' ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' :
+                      alert.status === 'Flagged' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-amber-500 shadow-[0_0_8px_#f59e0b] animate-pulse'
                     }`}></span>
                     <span className="text-slate-700">{alert.status}</span>
                   </div>
