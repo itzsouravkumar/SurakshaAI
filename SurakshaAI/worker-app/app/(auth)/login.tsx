@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowLeft, Shield } from 'lucide-react-native';
 import { AuthInput } from '@/components/auth/AuthInput';
 import { AuthButton } from '@/components/auth/AuthButton';
-import { DEPARTMENTS } from '@/constants/mockData';
+import { PLATFORMS } from '@/constants/mockData';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -24,7 +24,7 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     if (!identifier.trim() || !password.trim()) {
-      setError('Please enter your Employee ID / Phone and password.');
+      setError('Please enter your Gig Worker ID / Phone and password.');
       return;
     }
     setError('');
@@ -65,7 +65,7 @@ export default function LoginScreen() {
           </View>
           <Text style={styles.title}>Welcome back</Text>
           <Text style={styles.subtitle}>
-            Login with your Employee ID or registered phone number
+          Login with your Gig Worker ID or registered phone number
           </Text>
         </View>
 
@@ -74,8 +74,8 @@ export default function LoginScreen() {
           {error ? <Text style={styles.globalError}>{error}</Text> : null}
 
           <AuthInput
-            label="Employee ID or Phone Number"
-            placeholder="EMP-2047 or 9876543210"
+            label="Gig Worker ID or Phone Number"
+            placeholder="GW-2047 or 9876543210"
             value={identifier}
             onChangeText={setIdentifier}
             autoCapitalize="none"
@@ -104,7 +104,7 @@ export default function LoginScreen() {
         {/* Demo hint */}
         <View style={styles.demoBox}>
           <Text style={styles.demoTitle}>Demo Credentials</Text>
-          <Text style={styles.demoText}>Employee ID: EMP-2047</Text>
+          <Text style={styles.demoText}>Gig Worker ID: GW-2047</Text>
           <Text style={styles.demoText}>Password: 123456  |  OTP: 123456</Text>
         </View>
       </ScrollView>

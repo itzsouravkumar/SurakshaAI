@@ -5,15 +5,14 @@ export interface WorkerUser {
   id: string;
   name: string;
   phone: string;
-  department: string;
-  shift: string;
-  site: string;
-  supervisor: string;
+  department: string;   // platform name (Swiggy, Zomato, etc.)
+  shift: string;        // working hours
+  site: string;         // delivery zone
   joinDate: string;
   avatarInitials: string;
-  securityScore: number;
-  tasksCompleted: number;
-  alertsHandled: number;
+  securityScore: number;  // risk score
+  tasksCompleted: number; // deliveries completed
+  alertsHandled: number;  // claims settled
   reportsFiledCount: number;
 }
 

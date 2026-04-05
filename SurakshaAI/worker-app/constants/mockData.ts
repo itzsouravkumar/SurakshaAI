@@ -1,32 +1,31 @@
 // ============================================================
-// SurakshaAI Worker App — Centralized Mock Data
+// SurakshaAI Worker App — Centralized Mock Data (Gig Worker)
 // ============================================================
 
 export const MOCK_WORKER = {
-  id: 'EMP-2047',
+  id: 'GW-2047',
   name: 'Rajesh Kumar',
   phone: '+91 98765 43210',
-  department: 'Security Operations',
-  shift: 'Morning (06:00 – 14:00)',
-  site: 'Sector 12 Industrial Zone',
-  supervisor: 'Priya Sharma',
+  department: 'Swiggy',                          // platform
+  shift: 'Full Day (09:00 – 21:00)',              // working hours
+  site: 'Koramangala – BTM Zone',                // delivery zone
   joinDate: 'March 2022',
   avatarInitials: 'RK',
-  securityScore: 94,
-  tasksCompleted: 128,
-  alertsHandled: 47,
-  reportsFiledCount: 23,
+  securityScore: 82,                             // risk score
+  tasksCompleted: 3248,                          // deliveries completed
+  alertsHandled: 7,                              // claims settled
+  reportsFiledCount: 4,
 };
 
 export const MOCK_CREDENTIALS = {
   phone: '9876543210',
-  employeeId: 'EMP-2047',
+  gigId: 'GW-2047',
   password: '123456',
   otp: '123456',
 };
 
 // ──────────────────────────────────────────
-// Tasks
+// Policy / Coverage Items (replaces Tasks)
 // ──────────────────────────────────────────
 export type TaskStatus = 'pending' | 'accepted' | 'completed' | 'overdue';
 export type TaskPriority = 'high' | 'medium' | 'low';
@@ -45,59 +44,59 @@ export interface Task {
 
 export const MOCK_TASKS: Task[] = [
   {
-    id: 'T-001',
-    title: 'Patrol Gate B – Night Shift Handover',
-    description: 'Complete perimeter check at Gate B and document handover with incoming guard Arjun Singh.',
-    location: 'Gate B, Block 3',
-    assignedBy: 'Priya Sharma',
-    dueTime: '07:30 AM',
+    id: 'P-001',
+    title: 'Weekly Premium Due',
+    description: 'Pay ₹45 to activate coverage for this week. Covers heavy rain, extreme heat & AQI triggers.',
+    location: 'Koramangala – BTM Zone',
+    assignedBy: 'SurakshaAI',
+    dueTime: 'Today 11:59 PM',
     priority: 'high',
     status: 'pending',
-    category: 'Patrol',
+    category: 'Premium',
   },
   {
-    id: 'T-002',
-    title: 'CCTV Log Review – Zone C',
-    description: 'Download and review last 4 hours of CCTV footage from Zone C server room cameras.',
-    location: 'Zone C – Server Room',
-    assignedBy: 'Priya Sharma',
-    dueTime: '09:00 AM',
+    id: 'C-001',
+    title: 'Claim #CLM-089 – Rain Payout',
+    description: 'Rainfall exceeded 35mm threshold yesterday. ₹350 auto-payout is being processed to your UPI.',
+    location: 'Bangalore South Zone',
+    assignedBy: 'AI Trigger Engine',
+    dueTime: 'Processing',
     priority: 'high',
     status: 'accepted',
-    category: 'Surveillance',
+    category: 'Claim',
   },
   {
-    id: 'T-003',
-    title: 'Visitor Log Verification',
-    description: 'Cross-check visitor entries from yesterday with the approved visitor list. Report any discrepancy.',
-    location: 'Reception Desk, Main Block',
-    assignedBy: 'Admin Office',
-    dueTime: '11:00 AM',
+    id: 'P-002',
+    title: 'Update KYC Documents',
+    description: 'Upload a valid Aadhaar or driving licence to stay eligible for instant payouts.',
+    location: 'My Profile',
+    assignedBy: 'Compliance',
+    dueTime: 'Within 3 days',
     priority: 'medium',
     status: 'pending',
-    category: 'Admin',
+    category: 'KYC',
   },
   {
-    id: 'T-004',
-    title: 'Fire Exit Inspection – Building A',
-    description: 'Inspect all fire exits in Building A for unobstructed access. Mark checklist and photograph.',
-    location: 'Building A – All Floors',
-    assignedBy: 'Safety Officer',
-    dueTime: '01:00 PM',
+    id: 'C-002',
+    title: 'Claim #CLM-074 – AQI Disruption',
+    description: 'GRAP Stage III restrictions were active on Dec 18. ₹280 payout credited successfully.',
+    location: 'Delhi NCR Zone',
+    assignedBy: 'AI Trigger Engine',
+    dueTime: 'Credited',
     priority: 'medium',
     status: 'completed',
-    category: 'Safety',
+    category: 'Claim',
   },
   {
-    id: 'T-005',
-    title: 'Equipment Check – Control Room',
-    description: 'Verify all monitoring equipment is functional. Log any faults in the equipment register.',
-    location: 'Control Room, Floor 1',
-    assignedBy: 'Priya Sharma',
-    dueTime: '08:00 AM',
+    id: 'P-003',
+    title: 'Renew Coverage Pack',
+    description: 'Your 4-week coverage pack expired 2 days ago. Renew now to stay protected during disruptions.',
+    location: 'My Policy',
+    assignedBy: 'SurakshaAI',
+    dueTime: '2 days ago',
     priority: 'low',
     status: 'overdue',
-    category: 'Maintenance',
+    category: 'Premium',
   },
 ];
 
@@ -120,61 +119,61 @@ export interface Alert {
 export const MOCK_ALERTS: Alert[] = [
   {
     id: 'A-001',
-    title: 'Unauthorized Access Attempt',
-    description: 'Motion sensor triggered at Server Room B at 03:14 AM. No authorized personnel logged in that time.',
+    title: '🌧️ Heavy Rain Alert – Coverage Triggered',
+    description: 'Rainfall crossed 35mm threshold in Koramangala zone. Auto-payout of ₹350 is being processed. Expect credit within 2 hours.',
     severity: 'critical',
-    time: '3:14 AM',
-    location: 'Server Room B',
+    time: '6:14 AM',
+    location: 'Koramangala – BTM Zone',
     isRead: false,
     actionRequired: true,
   },
   {
     id: 'A-002',
-    title: 'Unsecured Wi-Fi Network Detected',
-    description: 'Rogue access point "FREE_WIFI_9" detected near Parking Zone D. Possible honeypot risk.',
+    title: '🔴 AQI Critical – GRAP Stage III Active',
+    description: 'Air Quality Index crossed 400+ in your delivery zone. Outdoor work is restricted. Coverage payout of ₹280 will be evaluated today.',
     severity: 'critical',
-    time: '5:48 AM',
-    location: 'Parking Zone D',
+    time: '7:30 AM',
+    location: 'Bangalore South',
     isRead: false,
     actionRequired: true,
   },
   {
     id: 'A-003',
-    title: 'Device Health Warning',
-    description: 'Your patrol device battery is below 20%. Please charge before next patrol round.',
+    title: '⚠️ Premium Payment Pending',
+    description: 'Your weekly premium of ₹45 is due today. Pay now to ensure coverage for rain and disruption events this week.',
     severity: 'warning',
-    time: '7:02 AM',
-    location: 'Your Device',
+    time: '8:00 AM',
+    location: 'My Account',
     isRead: false,
     actionRequired: false,
   },
   {
     id: 'A-004',
-    title: 'Perimeter Camera Offline – Zone F',
-    description: 'Camera F-04 has been offline for 45 minutes. Technical team has been notified.',
+    title: '🌡️ Extreme Heat Warning',
+    description: 'IMD forecasts 43°C+ for next 3 days. Your heat-trigger coverage threshold is 42°C. You may qualify for a payout.',
     severity: 'warning',
-    time: '6:20 AM',
-    location: 'Zone F, East Perimeter',
+    time: '5:45 AM',
+    location: 'Bangalore Central',
     isRead: true,
     actionRequired: false,
   },
   {
     id: 'A-005',
-    title: 'System Scan Completed',
-    description: 'Daily device security scan completed. No malware or threats detected. Score: 94/100.',
+    title: '✅ Risk Score Updated',
+    description: 'Your weekly risk score has been recalculated as 82/100 based on delivery history and zone conditions. No premium increase.',
     severity: 'info',
     time: '6:00 AM',
-    location: 'System',
+    location: 'SurakshaAI Engine',
     isRead: true,
     actionRequired: false,
   },
   {
     id: 'A-006',
-    title: 'Shift Briefing Available',
-    description: 'Morning shift briefing notes from Priya Sharma are now available. Review before starting patrol.',
+    title: '📢 New Coverage Feature: Civic Disruption',
+    description: 'Bandh and curfew disruptions are now covered under your plan. Verify your zone eligibility in the Policy tab.',
     severity: 'info',
-    time: '5:45 AM',
-    location: 'HQ Announcement',
+    time: '5:00 AM',
+    location: 'Product Update',
     isRead: true,
     actionRequired: false,
   },
@@ -184,39 +183,58 @@ export const MOCK_ALERTS: Alert[] = [
 // Recent Activity (Dashboard Feed)
 // ──────────────────────────────────────────
 export const MOCK_ACTIVITY = [
-  { id: 1, title: 'Patrol round completed – Gate A', app: 'Task Manager', time: '10m ago', type: 'success' },
-  { id: 2, title: 'Security scan passed', app: 'SurakshaAI Shield', time: '1h ago', type: 'info' },
-  { id: 3, title: 'Rogue network detected nearby', app: 'Network Guard', time: '3h ago', type: 'warning' },
-  { id: 4, title: 'Incident report #IR-089 submitted', app: 'Reports', time: '5h ago', type: 'success' },
+  { id: 1, title: 'Rain payout ₹350 credited to UPI', app: 'Claim Engine', time: '2h ago', type: 'success' },
+  { id: 2, title: 'Risk score updated: 82/100', app: 'AI Risk Engine', time: '6h ago', type: 'info' },
+  { id: 3, title: 'AQI crossed 400 – payout evaluation started', app: 'Trigger Monitor', time: '8h ago', type: 'warning' },
+  { id: 4, title: 'Weekly premium ₹45 paid', app: 'Payment', time: '3 days ago', type: 'success' },
 ];
 
 // ──────────────────────────────────────────
-// Incident Report Types
+// Claim / Incident Report Types
 // ──────────────────────────────────────────
 export const INCIDENT_TYPES = [
-  'Unauthorized Access',
-  'Suspicious Person / Vehicle',
-  'Equipment Malfunction',
-  'Safety Hazard',
-  'Network / Cyber Threat',
-  'Theft / Vandalism',
-  'Medical Emergency',
-  'Fire / Smoke',
+  'Heavy Rainfall – Unable to Work',
+  'Extreme Heat (42°C+)',
+  'Hazardous AQI / GRAP Restriction',
+  'Bandh / Curfew / Civic Disruption',
+  'Flooding / Waterlogging in Zone',
+  'Platform Outage (Partial)',
   'Other',
 ];
 
-export const DEPARTMENTS = [
-  'Security Operations',
-  'IT & Surveillance',
-  'Maintenance',
-  'Administration',
-  'Emergency Response',
-  'Access Control',
+export const PLATFORMS = [
+  'Swiggy',
+  'Zomato',
+  'Blinkit',
+  'Zepto',
+  'Amazon Flex',
+  'Porter',
+  'Dunzo',
+  'Other',
 ];
 
-export const SHIFTS = [
+export const VEHICLE_TYPES = [
+  'Two-Wheeler (Bike)',
+  'Two-Wheeler (Scooter)',
+  'Three-Wheeler (Auto)',
+  'Cycle',
+  'On Foot',
+];
+
+export const DELIVERY_ZONES = [
+  'Koramangala – BTM (Bangalore)',
+  'Indiranagar – Whitefield (Bangalore)',
+  'Connaught Place – Saket (Delhi)',
+  'Bandra – Andheri (Mumbai)',
+  'T Nagar – Adyar (Chennai)',
+  'Hitech City – Gachibowli (Hyderabad)',
+  'Other',
+];
+
+export const WORKING_HOURS = [
   'Morning (06:00 – 14:00)',
   'Evening (14:00 – 22:00)',
-  'Night (22:00 – 06:00)',
-  'Rotating',
+  'Full Day (09:00 – 21:00)',
+  'Night (20:00 – 04:00)',
+  'Flexible / On-Demand',
 ];

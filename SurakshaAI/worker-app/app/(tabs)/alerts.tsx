@@ -30,7 +30,7 @@ export default function AlertsScreen() {
     markRead(a.id);
     Alert.alert(
       'Action Taken',
-      `Alert "${a.title}" has been escalated to supervisor Priya Sharma. Incident logged.`
+      `Alert "${a.title}" has been logged. SurakshaAI will verify the disruption event and process your payout eligibility.`
     );
   };
 
@@ -52,7 +52,7 @@ export default function AlertsScreen() {
         <View style={styles.header}>
           <View>
             <View style={styles.headerTitleRow}>
-              <Text style={styles.headerTitle}>Security Alerts</Text>
+              <Text style={styles.headerTitle}>Disruption Alerts</Text>
               {unread > 0 && (
                 <View style={styles.unreadBadge}>
                   <Text style={styles.unreadBadgeText}>{unread}</Text>

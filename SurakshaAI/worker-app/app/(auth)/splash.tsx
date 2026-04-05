@@ -81,12 +81,12 @@ export default function SplashScreen() {
         >
           <Text style={styles.brand}>SurakshaAI</Text>
           <Text style={styles.tagline}>Suraksha aapke haath mein</Text>
-          <Text style={styles.taglineSub}>Safety in your hands</Text>
+          <Text style={styles.taglineSub}>Income protection for gig workers</Text>
         </Animated.View>
 
         {/* Pill badges */}
         <Animated.View style={[styles.badgeRow, { opacity: buttonAnim }]}>
-          {['AI-Powered', 'Real-time', 'Trusted'].map((b) => (
+          {['AI-Powered', 'Zero Paperwork', 'Instant Payout'].map((b) => (
             <View key={b} style={styles.badge}>
               <Text style={styles.badgeText}>{b}</Text>
             </View>
@@ -113,7 +113,7 @@ export default function SplashScreen() {
         </TouchableOpacity>
 
         <Text style={styles.footerText}>
-          Powered by SurakshaAI v2.1 · Hackathon Edition
+          Powered by SurakshaAI v2.1 · Gig Worker Edition
         </Text>
       </Animated.View>
     </View>

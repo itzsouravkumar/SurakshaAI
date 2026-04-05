@@ -12,18 +12,16 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   User,
-  Shield,
   Bell,
   MapPin,
   Moon,
-  ChevronRight,
   LogOut,
   Phone,
-  Building2,
+  Bike,
   Clock,
   Star,
-  ClipboardCheck,
-  AlertTriangle,
+  PackageCheck,
+  IndianRupee,
   FileText,
 } from 'lucide-react-native';
 import { useAuth } from '@/context/AuthContext';
@@ -55,16 +53,16 @@ export default function ProfileScreen() {
   };
 
   const stats = [
-    { label: 'Tasks Done', value: user?.tasksCompleted ?? 128, icon: ClipboardCheck, color: '#4f46e5' },
-    { label: 'Alerts Handled', value: user?.alertsHandled ?? 47, icon: AlertTriangle, color: '#f59e0b' },
-    { label: 'Reports Filed', value: user?.reportsFiledCount ?? 23, icon: FileText, color: '#10b981' },
+    { label: 'Deliveries', value: user?.tasksCompleted ?? 3248, icon: PackageCheck, color: '#4f46e5' },
+    { label: 'Claims Paid', value: user?.alertsHandled ?? 7, icon: IndianRupee, color: '#10b981' },
+    { label: 'Reports Filed', value: user?.reportsFiledCount ?? 4, icon: FileText, color: '#f59e0b' },
   ];
 
   return (
     <View style={{ flex: 1 }}>
       <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
-        <View style={[styles.blob, { backgroundColor: '#e0e7ff', top: -80, right: -80 }]} />
-        <View style={[styles.blob, { backgroundColor: '#d1fae5', bottom: 100, left: -80, width: 300, height: 300 }]} />
+        <View style={[styles.blob, { backgroundColor: '#d1fae5', top: -80, right: -80 }]} />
+        <View style={[styles.blob, { backgroundColor: '#dbeafe', bottom: 100, left: -80, width: 300, height: 300 }]} />
         <BlurView intensity={95} tint="light" style={StyleSheet.absoluteFillObject} />
       </View>
 
@@ -78,28 +76,28 @@ export default function ProfileScreen() {
               </View>
             </View>
             <Text style={styles.workerName}>{user?.name || 'Rajesh Kumar'}</Text>
-            <Text style={styles.workerId}>{user?.id || 'EMP-2047'}</Text>
+            <Text style={styles.workerId}>{user?.id || 'GW-2047'}</Text>
 
             <View style={styles.workerBadge}>
-              <Shield size={13} color="#4f46e5" />
-              <Text style={styles.workerBadgeText}>Verified Field Worker</Text>
+              <Star size={13} color="#f59e0b" />
+              <Text style={styles.workerBadgeText}>Verified Gig Worker</Text>
             </View>
 
-            {/* Score ring mini */}
+            {/* Score row */}
             <View style={styles.scoreRow}>
               <View style={styles.scoreBox}>
-                <Text style={styles.scoreValue}>{user?.securityScore || 94}</Text>
-                <Text style={styles.scoreLabel}>Security Score</Text>
+                <Text style={styles.scoreValue}>{user?.securityScore || 82}</Text>
+                <Text style={styles.scoreLabel}>Risk Score</Text>
               </View>
               <View style={styles.scoreDivider} />
               <View style={styles.scoreBox}>
                 <Text style={[styles.scoreValue, { color: '#10b981' }]}>Active</Text>
-                <Text style={styles.scoreLabel}>Status</Text>
+                <Text style={styles.scoreLabel}>Policy</Text>
               </View>
               <View style={styles.scoreDivider} />
               <View style={styles.scoreBox}>
-                <Text style={styles.scoreValue}>4.8 ★</Text>
-                <Text style={styles.scoreLabel}>Performance</Text>
+                <Text style={styles.scoreValue}>₹14.2k</Text>
+                <Text style={styles.scoreLabel}>Protected</Text>
               </View>
             </View>
           </View>
@@ -120,20 +118,21 @@ export default function ProfileScreen() {
             })}
           </View>
 
-          {/* Work Info */}
+          {/* Gig Work Info */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Work Information</Text>
+            <Text style={styles.sectionTitle}>Gig Work Details</Text>
             {[
-              { icon: Building2, label: 'Department', value: user?.department || 'Security Operations' },
-              { icon: Clock, label: 'Shift', value: user?.shift || 'Morning (06:00 – 14:00)' },
-              { icon: MapPin, label: 'Site', value: user?.site || 'Sector 12 Industrial Zone' },
-              { icon: Phone, label: 'Supervisor', value: user?.supervisor || 'Priya Sharma' },
+              { icon: Star, label: 'Platform', value: user?.department || 'Swiggy' },
+              { icon: Clock, label: 'Working Hours', value: user?.shift || 'Full Day (09:00 – 21:00)' },
+              { icon: MapPin, label: 'Delivery Zone', value: user?.site || 'Koramangala – BTM Zone' },
+              { icon: Bike, label: 'Vehicle', value: 'Two-Wheeler (Bike)' },
+              { icon: Phone, label: 'Contact', value: user?.phone || '+91 98765 43210' },
             ].map((item) => {
               const Icon = item.icon;
               return (
                 <View key={item.label} style={styles.infoRow}>
                   <View style={styles.infoIconBox}>
-                    <Icon size={16} color="#4f46e5" />
+                    <Icon size={16} color="#10b981" />
                   </View>
                   <View style={styles.infoTexts}>
                     <Text style={styles.infoLabel}>{item.label}</Text>
@@ -155,32 +154,32 @@ export default function ProfileScreen() {
                 </View>
                 <View>
                   <Text style={styles.settingLabel}>Push Notifications</Text>
-                  <Text style={styles.settingSubLabel}>Alerts and task updates</Text>
+                  <Text style={styles.settingSubLabel}>Trigger alerts & payout updates</Text>
                 </View>
               </View>
               <Switch
                 value={notifications}
                 onValueChange={setNotifications}
-                trackColor={{ false: '#e2e8f0', true: '#c7d2fe' }}
-                thumbColor={notifications ? '#4f46e5' : '#94a3b8'}
+                trackColor={{ false: '#e2e8f0', true: '#a7f3d0' }}
+                thumbColor={notifications ? '#10b981' : '#94a3b8'}
               />
             </View>
 
             <View style={styles.settingRow}>
               <View style={styles.settingLeft}>
-                <View style={[styles.settingIcon, { backgroundColor: 'rgba(16,185,129,0.12)' }]}>
-                  <MapPin size={16} color="#10b981" />
+                <View style={[styles.settingIcon, { backgroundColor: 'rgba(14,165,233,0.12)' }]}>
+                  <MapPin size={16} color="#0ea5e9" />
                 </View>
                 <View>
-                  <Text style={styles.settingLabel}>Location Sharing</Text>
-                  <Text style={styles.settingSubLabel}>Shared with supervisor during duty</Text>
+                  <Text style={styles.settingLabel}>Zone Tracking</Text>
+                  <Text style={styles.settingSubLabel}>Used for trigger verification only</Text>
                 </View>
               </View>
               <Switch
                 value={locationSharing}
                 onValueChange={setLocationSharing}
-                trackColor={{ false: '#e2e8f0', true: '#a7f3d0' }}
-                thumbColor={locationSharing ? '#10b981' : '#94a3b8'}
+                trackColor={{ false: '#e2e8f0', true: '#bae6fd' }}
+                thumbColor={locationSharing ? '#0ea5e9' : '#94a3b8'}
               />
             </View>
 
@@ -205,7 +204,7 @@ export default function ProfileScreen() {
 
           {/* App info */}
           <View style={styles.appInfo}>
-            <Text style={styles.appInfoText}>SurakshaAI Worker App v2.1</Text>
+            <Text style={styles.appInfoText}>SurakshaAI Gig Worker App v2.1</Text>
             <Text style={styles.appInfoText}>Member since {user?.joinDate || 'March 2022'}</Text>
           </View>
 
@@ -231,18 +230,18 @@ const styles = StyleSheet.create({
     shadowColor: '#000', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.08, shadowRadius: 20,
   },
   avatarRing: {
-    width: 96, height: 96, borderRadius: 30, borderWidth: 3, borderColor: '#c7d2fe',
+    width: 96, height: 96, borderRadius: 30, borderWidth: 3, borderColor: '#a7f3d0',
     justifyContent: 'center', alignItems: 'center', marginBottom: 16,
   },
-  avatar: { width: 80, height: 80, borderRadius: 24, backgroundColor: '#4f46e5', justifyContent: 'center', alignItems: 'center' },
+  avatar: { width: 80, height: 80, borderRadius: 24, backgroundColor: '#10b981', justifyContent: 'center', alignItems: 'center' },
   avatarText: { fontSize: 28, fontWeight: '800', color: '#ffffff' },
   workerName: { fontSize: 22, fontWeight: '800', color: '#0f172a', marginBottom: 4, letterSpacing: -0.3 },
   workerId: { fontSize: 14, color: '#64748b', fontWeight: '600', marginBottom: 12 },
   workerBadge: {
-    flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#eef2ff',
+    flexDirection: 'row', alignItems: 'center', gap: 6, backgroundColor: '#fef9c3',
     borderRadius: 20, paddingHorizontal: 12, paddingVertical: 5, marginBottom: 20,
   },
-  workerBadgeText: { color: '#4f46e5', fontWeight: '700', fontSize: 12 },
+  workerBadgeText: { color: '#854d0e', fontWeight: '700', fontSize: 12 },
   scoreRow: { flexDirection: 'row', width: '100%', justifyContent: 'space-around' },
   scoreBox: { alignItems: 'center' },
   scoreValue: { fontSize: 18, fontWeight: '800', color: '#0f172a', marginBottom: 2 },
@@ -262,7 +261,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 15, fontWeight: '800', color: '#0f172a', marginBottom: 16 },
   infoRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 14 },
-  infoIconBox: { width: 36, height: 36, borderRadius: 10, backgroundColor: '#eef2ff', justifyContent: 'center', alignItems: 'center', marginRight: 14 },
+  infoIconBox: { width: 36, height: 36, borderRadius: 10, backgroundColor: '#d1fae5', justifyContent: 'center', alignItems: 'center', marginRight: 14 },
   infoTexts: {},
   infoLabel: { fontSize: 11, color: '#94a3b8', fontWeight: '600', marginBottom: 2, textTransform: 'uppercase', letterSpacing: 0.3 },
   infoValue: { fontSize: 14, color: '#0f172a', fontWeight: '700' },

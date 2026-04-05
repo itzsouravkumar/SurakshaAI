@@ -14,14 +14,14 @@ import { User, CheckCircle2 } from 'lucide-react-native';
 import { AuthInput } from '@/components/auth/AuthInput';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { useAuth } from '@/context/AuthContext';
-import { SHIFTS } from '@/constants/mockData';
+import { WORKING_HOURS } from '@/constants/mockData';
 
 export default function OnboardingProfileScreen() {
   const router = useRouter();
   const { user, completeOnboarding } = useAuth();
-  const [site, setSite] = useState('Sector 12 Industrial Zone');
+  const [site, setSite] = useState('Koramangala – BTM Zone');
   const [emergencyContact, setEmergencyContact] = useState('');
-  const [selectedShift, setSelectedShift] = useState('Morning (06:00 – 14:00)');
+  const [selectedShift, setSelectedShift] = useState('Full Day (09:00 – 21:00)');
   const [photoAdded, setPhotoAdded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +52,7 @@ export default function OnboardingProfileScreen() {
         </View>
         <Text style={styles.title}>Your Profile</Text>
         <Text style={styles.subtitle}>
-          Confirm and complete your field worker profile to get started.
+          Confirm your delivery details to activate income protection.
         </Text>
 
         {/* Avatar select */}
@@ -76,13 +76,13 @@ export default function OnboardingProfileScreen() {
             )}
           </TouchableOpacity>
            <Text style={styles.avatarName}>{user?.name || 'Rajesh Kumar'}</Text>
-          <Text style={styles.avatarId}>{user?.id || 'EMP-2047'} · {user?.department || 'Security Operations'}</Text>
+          <Text style={styles.avatarId}>{user?.id || 'GW-2047'} · {user?.department || 'Swiggy'}</Text>
         </View>
 
         {/* Shift selection */}
-        <Text style={styles.sectionLabel}>Shift Preference</Text>
+        <Text style={styles.sectionLabel}>Working Hours</Text>
         <View style={styles.shiftRow}>
-          {SHIFTS.slice(0, 3).map((s) => {
+          {WORKING_HOURS.slice(0, 3).map((s) => {
             const [label] = s.split(' (');
             return (
               <TouchableOpacity
@@ -101,8 +101,8 @@ export default function OnboardingProfileScreen() {
 
         {/* Form fields */}
         <AuthInput
-          label="Work Site / Location"
-          placeholder="e.g. Sector 12 Industrial Zone"
+          label="Delivery Zone"
+          placeholder="e.g. Koramangala – BTM Zone"
           value={site}
           onChangeText={setSite}
         />
@@ -118,7 +118,7 @@ export default function OnboardingProfileScreen() {
         <View style={styles.infoCard}>
           <Text style={styles.infoTitle}>🔐 Your data is secure</Text>
           <Text style={styles.infoBody}>
-            SurakshaAI encrypts all personal data and only shares location with your authorized supervisor during active duty hours.
+            SurakshaAI encrypts all personal data. Location is used only for disruption trigger verification — never shared with your platform employer.
           </Text>
         </View>
 

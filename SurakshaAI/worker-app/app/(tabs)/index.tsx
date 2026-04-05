@@ -11,11 +11,10 @@ import {
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import {
-  AlertTriangle,
   CheckCircle,
   MapPin,
-  Phone,
-  Siren,
+  IndianRupee,
+  Zap,
 } from 'lucide-react-native';
 import { Header } from '@/components/dashboard/Header';
 import { HeroCard } from '@/components/dashboard/HeroCard';
@@ -25,28 +24,28 @@ import { PrivacyBanner } from '@/components/dashboard/PrivacyBanner';
 import { useAuth } from '@/context/AuthContext';
 
 const quickActions = [
-  { id: 'sos', label: 'Panic SOS', icon: Siren, color: '#ef4444', bg: 'rgba(239,68,68,0.15)', border: 'rgba(239,68,68,0.3)' },
-  { id: 'checkin', label: 'Check In', icon: MapPin, color: '#10b981', bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)' },
-  { id: 'supervisor', label: 'Call Super.', icon: Phone, color: '#0ea5e9', bg: 'rgba(14,165,233,0.15)', border: 'rgba(14,165,233,0.3)' },
+  { id: 'claim', label: 'File Claim', icon: IndianRupee, color: '#10b981', bg: 'rgba(16,185,129,0.15)', border: 'rgba(16,185,129,0.3)' },
+  { id: 'zone', label: 'My Zone', icon: MapPin, color: '#0ea5e9', bg: 'rgba(14,165,233,0.15)', border: 'rgba(14,165,233,0.3)' },
+  { id: 'premium', label: 'Pay Premium', icon: Zap, color: '#f59e0b', bg: 'rgba(245,158,11,0.15)', border: 'rgba(245,158,11,0.3)' },
 ];
 
 export default function DashboardScreen() {
   const { user } = useAuth();
-  const securityScore = user?.securityScore ?? 94;
-  const [checkedIn, setCheckedIn] = useState(false);
+  const riskScore = user?.securityScore ?? 82;
+  const [coverageActive, setCoverageActive] = useState(true);
 
   const handleAction = (id: string) => {
-    if (id === 'sos') {
+    if (id === 'claim') {
       Alert.alert(
-        '🚨 Panic SOS Triggered',
-        'Your location and SOS signal have been sent to Supervisor Priya Sharma and the security control room.',
-        [{ text: 'Cancel SOS', style: 'destructive' }, { text: 'OK' }]
+        '📋 File a Claim',
+        'Triggering events (rain, heat, AQI, bandh) are auto-detected by SurakshaAI. Tap "Reports" tab to manually file a disruption report.',
+        [{ text: 'Go to Reports' }, { text: 'Cancel', style: 'cancel' }]
       );
-    } else if (id === 'checkin') {
-      setCheckedIn(true);
-      Alert.alert('✅ Checked In', 'Your check-in at Sector 12 Industrial Zone has been recorded at ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }));
-    } else if (id === 'supervisor') {
-      Alert.alert('📞 Calling Supervisor', 'Connecting to Priya Sharma...\n(Mock call — no actual call made)');
+    } else if (id === 'zone') {
+      setCoverageActive(true);
+      Alert.alert('📍 Active Zone', 'Currently tracking: Koramangala – BTM Zone\nAll triggers (rain, AQI, heat, bandh) are being monitored in real time.');
+    } else if (id === 'premium') {
+      Alert.alert('💳 Pay Weekly Premium', 'Your ₹45 weekly premium covers:\n• Heavy Rain\n• Extreme Heat (42°C+)\n• AQI Disruptions\n• Civic Bandh / Curfew\n\n(Mock payment — no actual charge)');
     }
   };
 
@@ -56,9 +55,9 @@ export default function DashboardScreen() {
 
       {/* Background blobs */}
       <View style={StyleSheet.absoluteFillObject} pointerEvents="none">
-        <View style={[styles.blob, { backgroundColor: '#e0e7ff', top: '-10%', left: '-20%', width: 400, height: 400 }]} />
-        <View style={[styles.blob, { backgroundColor: '#f3e8ff', top: '30%', right: '-30%', width: 450, height: 450 }]} />
-        <View style={[styles.blob, { backgroundColor: '#ccfbf1', bottom: '-5%', left: '10%', width: 350, height: 350 }]} />
+        <View style={[styles.blob, { backgroundColor: '#d1fae5', top: '-10%', left: '-20%', width: 400, height: 400 }]} />
+        <View style={[styles.blob, { backgroundColor: '#dbeafe', top: '30%', right: '-30%', width: 450, height: 450 }]} />
+        <View style={[styles.blob, { backgroundColor: '#fef9c3', bottom: '-5%', left: '10%', width: 350, height: 350 }]} />
         <BlurView intensity={100} tint="light" style={StyleSheet.absoluteFillObject} />
       </View>
 
@@ -66,15 +65,15 @@ export default function DashboardScreen() {
         <Header userName={user?.name ?? 'Rajesh Kumar'} />
 
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-          {/* Check-in banner */}
-          {checkedIn && (
-            <View style={styles.checkinBanner}>
+          {/* Coverage active banner */}
+          {coverageActive && (
+            <View style={styles.coverageBanner}>
               <CheckCircle size={16} color="#059669" />
-              <Text style={styles.checkinText}>Checked in · Sector 12 Industrial Zone</Text>
+              <Text style={styles.coverageText}>Coverage Active · Koramangala – BTM Zone</Text>
             </View>
           )}
 
-          <HeroCard securityScore={securityScore} />
+          <HeroCard securityScore={riskScore} />
 
           {/* Quick Actions */}
           <Text style={styles.sectionTitle}>Quick Actions</Text>
@@ -120,9 +119,9 @@ const styles = StyleSheet.create({
   },
   actionIconBox: { width: 44, height: 44, borderRadius: 14, justifyContent: 'center', alignItems: 'center', marginBottom: 8 },
   actionLabel: { fontSize: 12, fontWeight: '700', textAlign: 'center' },
-  checkinBanner: {
+  coverageBanner: {
     flexDirection: 'row', alignItems: 'center', gap: 8,
     backgroundColor: '#d1fae5', borderRadius: 12, padding: 12, marginBottom: 16,
   },
-  checkinText: { color: '#065f46', fontWeight: '600', fontSize: 13 },
+  coverageText: { color: '#065f46', fontWeight: '600', fontSize: 13 },
 });

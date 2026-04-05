@@ -33,12 +33,12 @@ export default function TasksScreen() {
 
   const handleAccept = (task: Task) => {
     updateStatus(task.id, 'accepted');
-    Alert.alert('Task Accepted', `You have accepted: ${task.title}`);
+    Alert.alert('Item Accepted', `Action started: ${task.title}`);
   };
 
   const handleComplete = (task: Task) => {
     updateStatus(task.id, 'completed');
-    Alert.alert('✅ Task Completed', `Well done! You completed: ${task.title}`);
+    Alert.alert('✅ Done', `Completed: ${task.title}`);
   };
 
   const counts = {
@@ -60,7 +60,7 @@ export default function TasksScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.headerTitle}>My Tasks</Text>
+            <Text style={styles.headerTitle}>My Coverage</Text>
             <Text style={styles.headerSub}>
               {counts.pending} pending · {counts.accepted} active · {counts.overdue} overdue
             </Text>
@@ -100,7 +100,7 @@ export default function TasksScreen() {
           ListEmptyComponent={
             <View style={styles.empty}>
               <Text style={styles.emptyEmoji}>🎉</Text>
-              <Text style={styles.emptyText}>No tasks in this category</Text>
+              <Text style={styles.emptyText}>Nothing here right now</Text>
             </View>
           }
         />

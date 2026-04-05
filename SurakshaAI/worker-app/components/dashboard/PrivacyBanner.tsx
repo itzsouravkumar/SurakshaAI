@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Fingerprint, ChevronRight } from 'lucide-react-native';
+import { ShieldCheck, ChevronRight } from 'lucide-react-native';
 import { GlassCard } from '../ui/GlassCard';
 
 export function PrivacyBanner() {
@@ -9,11 +9,11 @@ export function PrivacyBanner() {
       <GlassCard style={styles.bannerCard}>
         <View style={styles.bannerContent}>
           <View style={styles.bannerIconBox}>
-            <Fingerprint size={24} color="#4f46e5" />
+            <ShieldCheck size={24} color="#10b981" />
           </View>
           <View style={styles.bannerText}>
-            <Text style={styles.bannerTitle}>Privacy Audit</Text>
-            <Text style={styles.bannerSubtitle}>2 apps have location access</Text>
+            <Text style={styles.bannerTitle}>Policy Active</Text>
+            <Text style={styles.bannerSubtitle}>4-week plan · Expires Apr 28, 2026</Text>
           </View>
           <ChevronRight size={20} color="#94a3b8" />
         </View>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 16,
-    backgroundColor: '#e0e7ff',
+    backgroundColor: '#d1fae5',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,

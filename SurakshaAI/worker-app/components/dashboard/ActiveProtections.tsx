@@ -1,23 +1,23 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import { Wifi, Globe, Smartphone, Fingerprint } from 'lucide-react-native';
+import { CloudRain, Thermometer, Wind, AlertOctagon } from 'lucide-react-native';
 import { GlassCard } from '../ui/GlassCard';
 
 const { width } = Dimensions.get('window');
 
-const protections = [
-  { id: 'wifi', icon: Wifi, title: 'Wi-Fi Guard', status: 'Secure', active: true, color: '#0ea5e9' },
-  { id: 'web', icon: Globe, title: 'Web Shield', status: 'Active', active: true, color: '#8b5cf6' },
-  { id: 'app', icon: Smartphone, title: 'App Scanner', status: 'Safe', active: true, color: '#10b981' },
-  { id: 'id', icon: Fingerprint, title: 'Identity Monitor', status: 'Attention', active: false, color: '#f59e0b' },
+const coverageTriggers = [
+  { id: 'rain', icon: CloudRain, title: 'Heavy Rain', status: 'Monitoring', active: true, color: '#0ea5e9' },
+  { id: 'heat', icon: Thermometer, title: 'Extreme Heat', status: 'Safe (38°C)', active: true, color: '#f59e0b' },
+  { id: 'aqi', icon: Wind, title: 'AQI Monitor', status: 'Alert! 320', active: false, color: '#8b5cf6' },
+  { id: 'bandh', icon: AlertOctagon, title: 'Civic Disruption', status: 'Clear', active: true, color: '#10b981' },
 ];
 
 export function ActiveProtections() {
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>Active Protections</Text>
+      <Text style={styles.sectionTitle}>Live Coverage Triggers</Text>
       <View style={styles.grid}>
-        {protections.map((item) => {
+        {coverageTriggers.map((item) => {
           const Icon = item.icon;
           return (
             <GlassCard key={item.id} style={styles.gridItem}>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   gridItem: {
-    width: (width - 56) / 2, // Accounting for padding and gap
+    width: (width - 56) / 2,
     marginBottom: 16,
   },
   gridItemInner: {

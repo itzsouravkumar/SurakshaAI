@@ -13,14 +13,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowLeft, UserPlus } from 'lucide-react-native';
 import { AuthInput } from '@/components/auth/AuthInput';
 import { AuthButton } from '@/components/auth/AuthButton';
-import { DEPARTMENTS, SHIFTS } from '@/constants/mockData';
+import { PLATFORMS, WORKING_HOURS } from '@/constants/mockData';
 
 type FormField = {
   fullName: string;
   phone: string;
-  employeeId: string;
-  department: string;
-  shift: string;
+  gigId: string;
+  platform: string;
+  workingHours: string;
   password: string;
   confirmPassword: string;
 };
@@ -30,22 +30,22 @@ export default function RegisterScreen() {
   const [form, setForm] = useState<FormField>({
     fullName: '',
     phone: '',
-    employeeId: '',
-    department: '',
-    shift: '',
+    gigId: '',
+    platform: '',
+    workingHours: '',
     password: '',
     confirmPassword: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [deptOpen, setDeptOpen] = useState(false);
-  const [shiftOpen, setShiftOpen] = useState(false);
+  const [platformOpen, setPlatformOpen] = useState(false);
+  const [hoursOpen, setHoursOpen] = useState(false);
 
   const set = (key: keyof FormField) => (val: string) =>
     setForm((f) => ({ ...f, [key]: val }));
 
   const handleRegister = () => {
-    if (!form.fullName || !form.phone || !form.employeeId || !form.password) {
+    if (!form.fullName || !form.phone || !form.gigId || !form.password) {
       setError('Please fill in all required fields.');
       return;
     }
@@ -74,10 +74,10 @@ export default function RegisterScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <LinearGradient
-        colors={['#0a0a1a', '#0f0c29', '#1a1040']}
+        colors={['#0a0a1a', '#052e16', '#0f172a']}
         style={StyleSheet.absoluteFillObject}
       />
-      <View style={[styles.orb, { top: -80, left: -60, backgroundColor: '#7c3aed' }]} />
+      <View style={[styles.orb, { top: -80, left: -60, backgroundColor: '#10b981' }]} />
 
       <ScrollView
         contentContainerStyle={styles.scroll}
@@ -94,7 +94,7 @@ export default function RegisterScreen() {
           </View>
           <Text style={styles.title}>Create Account</Text>
           <Text style={styles.subtitle}>
-            Register as a SurakshaAI field worker
+            Join SurakshaAI — protect your gig income today
           </Text>
         </View>
 
@@ -102,54 +102,54 @@ export default function RegisterScreen() {
 
         <AuthInput label="Full Name *" placeholder="Rajesh Kumar" value={form.fullName} onChangeText={set('fullName')} />
         <AuthInput label="Phone Number *" placeholder="9876543210" value={form.phone} onChangeText={set('phone')} keyboardType="phone-pad" maxLength={10} />
-        <AuthInput label="Employee ID *" placeholder="EMP-2047" value={form.employeeId} onChangeText={set('employeeId')} autoCapitalize="characters" />
+        <AuthInput label="Gig Worker ID *" placeholder="GW-2047 (from your platform app)" value={form.gigId} onChangeText={set('gigId')} autoCapitalize="characters" />
 
-        {/* Department Picker */}
+        {/* Platform Picker */}
         <View style={styles.pickerWrapper}>
-          <Text style={styles.pickerLabel}>Department *</Text>
+          <Text style={styles.pickerLabel}>Platform / Employer *</Text>
           <TouchableOpacity
             style={styles.pickerBtn}
-            onPress={() => { setDeptOpen(!deptOpen); setShiftOpen(false); }}
+            onPress={() => { setPlatformOpen(!platformOpen); setHoursOpen(false); }}
           >
-            <Text style={[styles.pickerBtnText, !form.department && { color: 'rgba(255,255,255,0.35)' }]}>
-              {form.department || 'Select Department'}
+            <Text style={[styles.pickerBtnText, !form.platform && { color: 'rgba(255,255,255,0.35)' }]}>
+              {form.platform || 'Select your platform (Swiggy, Zomato...)'}
             </Text>
           </TouchableOpacity>
-          {deptOpen && (
+          {platformOpen && (
             <View style={styles.dropdown}>
-              {DEPARTMENTS.map((d) => (
+              {PLATFORMS.map((p) => (
                 <TouchableOpacity
-                  key={d}
+                  key={p}
                   style={styles.dropdownItem}
-                  onPress={() => { set('department')(d); setDeptOpen(false); }}
+                  onPress={() => { set('platform')(p); setPlatformOpen(false); }}
                 >
-                  <Text style={[styles.dropdownItemText, form.department === d && { color: '#a5b4fc' }]}>{d}</Text>
+                  <Text style={[styles.dropdownItemText, form.platform === p && { color: '#6ee7b7' }]}>{p}</Text>
                 </TouchableOpacity>
               ))}
             </View>
           )}
         </View>
 
-        {/* Shift Picker */}
+        {/* Working Hours Picker */}
         <View style={styles.pickerWrapper}>
-          <Text style={styles.pickerLabel}>Shift</Text>
+          <Text style={styles.pickerLabel}>Typical Working Hours</Text>
           <TouchableOpacity
             style={styles.pickerBtn}
-            onPress={() => { setShiftOpen(!shiftOpen); setDeptOpen(false); }}
+            onPress={() => { setHoursOpen(!hoursOpen); setPlatformOpen(false); }}
           >
-            <Text style={[styles.pickerBtnText, !form.shift && { color: 'rgba(255,255,255,0.35)' }]}>
-              {form.shift || 'Select Shift'}
+            <Text style={[styles.pickerBtnText, !form.workingHours && { color: 'rgba(255,255,255,0.35)' }]}>
+              {form.workingHours || 'Select working hours'}
             </Text>
           </TouchableOpacity>
-          {shiftOpen && (
+          {hoursOpen && (
             <View style={styles.dropdown}>
-              {SHIFTS.map((s) => (
+              {WORKING_HOURS.map((h) => (
                 <TouchableOpacity
-                  key={s}
+                  key={h}
                   style={styles.dropdownItem}
-                  onPress={() => { set('shift')(s); setShiftOpen(false); }}
+                  onPress={() => { set('workingHours')(h); setHoursOpen(false); }}
                 >
-                  <Text style={[styles.dropdownItemText, form.shift === s && { color: '#a5b4fc' }]}>{s}</Text>
+                  <Text style={[styles.dropdownItemText, form.workingHours === h && { color: '#6ee7b7' }]}>{h}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -175,9 +175,9 @@ const styles = StyleSheet.create({
   },
   header: { marginBottom: 32 },
   iconBox: {
-    width: 64, height: 64, backgroundColor: '#7c3aed', borderRadius: 20,
+    width: 64, height: 64, backgroundColor: '#10b981', borderRadius: 20,
     justifyContent: 'center', alignItems: 'center', marginBottom: 20,
-    shadowColor: '#7c3aed', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.4, shadowRadius: 16,
+    shadowColor: '#10b981', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.4, shadowRadius: 16,
   },
   title: { fontSize: 30, fontWeight: '800', color: '#ffffff', marginBottom: 10, letterSpacing: -0.5 },
   subtitle: { fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 22 },
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   pickerBtnText: { fontSize: 16, color: '#ffffff' },
   dropdown: {
-    backgroundColor: '#1e1b4b', borderWidth: 1, borderColor: 'rgba(255,255,255,0.12)',
+    backgroundColor: '#052e16', borderWidth: 1, borderColor: 'rgba(255,255,255,0.12)',
     borderRadius: 14, marginTop: 4, overflow: 'hidden',
   },
   dropdownItem: { paddingHorizontal: 16, paddingVertical: 13, borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,0.06)' },

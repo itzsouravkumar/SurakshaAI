@@ -74,13 +74,13 @@ export function TaskCard({ task, onAccept, onComplete }: TaskCardProps) {
         <View style={styles.actions}>
           {task.status === 'pending' || task.status === 'overdue' ? (
             <TouchableOpacity style={styles.acceptBtn} onPress={onAccept}>
-              <Text style={styles.acceptBtnText}>Accept Task</Text>
+              <Text style={styles.acceptBtnText}>Take Action</Text>
             </TouchableOpacity>
           ) : null}
           {task.status === 'accepted' ? (
             <TouchableOpacity style={styles.completeBtn} onPress={onComplete}>
               <CheckCircle2 size={16} color="#10b981" />
-              <Text style={styles.completeBtnText}>Mark Complete</Text>
+              <Text style={styles.completeBtnText}>Mark Done</Text>
             </TouchableOpacity>
           ) : null}
         </View>
@@ -89,7 +89,7 @@ export function TaskCard({ task, onAccept, onComplete }: TaskCardProps) {
       {isCompleted && (
         <View style={styles.completedRow}>
           <CheckCircle2 size={16} color="#10b981" />
-          <Text style={styles.completedText}>Task completed</Text>
+          <Text style={styles.completedText}>Done ✓</Text>
         </View>
       )}
     </View>

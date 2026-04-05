@@ -55,7 +55,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="tasks"
         options={{
-          title: 'Tasks',
+          title: 'Coverage',
           tabBarIcon: ({ color, size }) => <ClipboardList size={size} color={color} />,
         }}
       />
@@ -69,7 +69,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="reports"
         options={{
-          title: 'Reports',
+          title: 'Claims',
           tabBarIcon: ({ color, size }) => <FileText size={size} color={color} />,
         }}
       />

@@ -63,7 +63,7 @@ export default function ReportsScreen() {
             </View>
             <Text style={styles.successTitle}>Report Submitted!</Text>
             <Text style={styles.successSubtitle}>
-              Your incident report has been filed and shared with Supervisor Priya Sharma.
+              SurakshaAI is verifying the disruption event. Payout will be processed within 2–4 hours if trigger conditions are met.
             </Text>
             <View style={styles.reportIdBox}>
               <Text style={styles.reportIdLabel}>Report ID</Text>
@@ -113,8 +113,8 @@ export default function ReportsScreen() {
               <FileText size={22} color="#4f46e5" />
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.headerTitle}>File Incident Report</Text>
-              <Text style={styles.headerSub}>Report and log any security incidents</Text>
+              <Text style={styles.headerTitle}>File Disruption Claim</Text>
+              <Text style={styles.headerSub}>Report an event that stopped you from working</Text>
             </View>
           </View>
 
@@ -125,7 +125,7 @@ export default function ReportsScreen() {
             </View>
             <View>
               <Text style={styles.workerName}>{user?.name || 'Rajesh Kumar'}</Text>
-              <Text style={styles.workerDept}>{user?.id || 'EMP-2047'} · {user?.department || 'Security Operations'}</Text>
+              <Text style={styles.workerDept}>{user?.id || 'GW-2047'} · {user?.department || 'Swiggy Delivery Partner'}</Text>
             </View>
           </View>
 
@@ -170,7 +170,7 @@ export default function ReportsScreen() {
           <Text style={styles.fieldLabel}>Description *</Text>
           <TextInput
             style={styles.textArea}
-            placeholder="Describe what happened, who was involved, and any actions taken..."
+            placeholder="Describe the disruption — e.g. heavy rain prevented delivery, zone flooded, bandh in area..."
             placeholderTextColor="#94a3b8"
             value={description}
             onChangeText={setDescription}
@@ -216,7 +216,7 @@ export default function ReportsScreen() {
           </TouchableOpacity>
 
           <Text style={styles.footNote}>
-            Reports are encrypted and forwarded to your supervisor immediately.
+            Claims are verified by AI using weather, AQI & civic event data. No manual approval needed.
           </Text>
         </ScrollView>
       </SafeAreaView>

@@ -31,8 +31,8 @@ const PERMISSIONS: Permission[] = [
     icon: MapPin,
     color: '#10b981',
     title: 'Location Access',
-    subtitle: 'Required for patrol tracking',
-    reason: 'Tracks your patrol route and verifies check-in at designated zones in real-time.',
+    subtitle: 'Required for trigger verification',
+    reason: 'Verifies you are in the affected disruption zone (flood, rain, AQI) when a payout trigger fires.',
     granted: false,
   },
   {
@@ -40,8 +40,8 @@ const PERMISSIONS: Permission[] = [
     icon: Bell,
     color: '#f59e0b',
     title: 'Push Notifications',
-    subtitle: 'Required for security alerts',
-    reason: 'Sends instant alerts for unauthorized access, threats, and supervisor messages.',
+    subtitle: 'Required for payout alerts',
+    reason: 'Sends real-time alerts when a trigger event is detected in your zone — rain, heat, AQI, bandh.',
     granted: false,
   },
   {
@@ -49,8 +49,8 @@ const PERMISSIONS: Permission[] = [
     icon: Camera,
     color: '#4f46e5',
     title: 'Camera Access',
-    subtitle: 'Required for incident reports',
-    reason: 'Captures photos of incidents, equipment faults, or suspicious activity for reports.',
+    subtitle: 'For claim evidence attachment',
+    reason: 'Lets you attach photos of disruption events (flooding, road blockage) when filing a claim.',
     granted: false,
   },
 ];
@@ -86,7 +86,7 @@ export default function PermissionsScreen() {
           </View>
           <Text style={styles.title}>App Permissions</Text>
           <Text style={styles.subtitle}>
-            SurakshaAI needs the following permissions to keep you and your worksite safe.
+            SurakshaAI needs these permissions to detect disruption events and protect your income.
           </Text>
 
           {/* Progress */}
