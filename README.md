@@ -976,7 +976,7 @@ Loss Ratio Target          :  55–60%
 | Full-Stack / AI Engineer | [Sourav Kumar] |
 | Backend | [Garv Raj] |
 | Frontend | [Ameya Gupta] |
-| UI/UX + Research | [Lasya Priya] |
+| UI/UX + Research | [Lasya Priya PSS] |
 
 **Repository:** [GitHub Link (https://github.com/itzsouravkumar/SurakshaAI)]
 
